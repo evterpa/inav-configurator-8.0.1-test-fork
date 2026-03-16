@@ -124,6 +124,9 @@
     "tabPidTuning": {
         "message": "PIDチューニング"
     },
+    "tabTelemetry": {
+        "message": "テレメトリー"
+    },
     "tabReceiver": {
         "message": "受信機"
     },

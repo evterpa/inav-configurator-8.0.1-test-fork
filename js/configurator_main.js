@@ -225,6 +225,10 @@ $(function() {
                             require('./../tabs/pid_tuning');
                             TABS.pid_tuning.initialize(content_ready);
                             break;
+                        case 'telemetry':
+                            require('./../tabs/telemetry');
+                            TABS.telemetry.initialize(content_ready);
+                            break;
                         case 'receiver':
                             require('./../tabs/receiver');
                             TABS.receiver.initialize(content_ready);

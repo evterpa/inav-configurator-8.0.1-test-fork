@@ -122,6 +122,8 @@
     },
     "tabPidTuning": {
         "message": "PID 调整"
+    },"tabTelemetry": {
+        "message": "遥测"
     },
     "tabReceiver": {
         "message": "接收机"

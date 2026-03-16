@@ -126,6 +126,8 @@
     },
     "tabPidTuning": {
         "message": "Tuning"
+    },"tabTelemetry": {
+        "message": "Telemetry"
     },
     "tabReceiver": {
         "message": "Receiver"

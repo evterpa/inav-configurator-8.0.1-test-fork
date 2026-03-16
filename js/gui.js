@@ -39,6 +39,7 @@ var GUI_control = function () {
         'onboard_logging',
         'outputs',
         'pid_tuning',
+        'telemetry',
         'ports',
         'receiver',
         'sensors',

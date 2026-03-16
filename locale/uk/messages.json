@@ -123,6 +123,8 @@
     },
     "tabPidTuning": {
         "message": "Налаштування ПІД"
+    },"tabTelemetry": {
+        "message": "Телеметрия"
     },
     "tabReceiver": {
         "message": "Приймач"

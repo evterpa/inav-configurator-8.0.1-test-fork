@@ -1,0 +1,479 @@
+.rate-tpa_input {
+    width: 150px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid silver;
+    border-radius: 3px;
+    padding-left: 3px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.settings-table.settings-table--inav td,
+.settings-table.settings-table--filtering td,
+.settings-table.settings-table--misc td {
+    background-color: #f3f3f3;
+    width: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.settings-table.settings-table--filtering th,
+.settings-table.settings-table--misc th {
+    width: 18em;
+}
+
+.settings-table th {
+    background-color: #828885;
+    padding: 4px;
+    border-left: 0 solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    width: 12em;
+}
+
+.tab-telemetry_tuning .cf tr {
+    background-color: #DEDEDE;
+}
+
+.tab-telemetry_tuning .cf th {
+    border-right: solid 1px silver;
+    height: 19px;
+    font-weight: normal;
+}
+
+.tab-telemetry_tuning .cf th:last-child {
+    border-right: 0;
+}
+
+.tab-telemetry_tuning .cf td:first-child {
+    border-bottom-left-radius: 3px;
+}
+
+.tab-telemetry_tuning .cf td:last-child {
+    border-bottom-right-radius: 3px;
+    border-right: 0;
+}
+
+.tab-telemetry_tuning .cf input {
+    margin: 4px;
+    width: calc(100% - 10px);
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+
+.tab-telemetry_tuning .cf select {
+    margin: 4px;
+    width: calc(100% - 10px);
+}
+
+.settings-table tr:first-child th {
+    border-top-left-radius: 5px;
+}
+
+.settings-table tr:first-child td {
+    border-top-right-radius: 5px;
+}
+
+.settings-table tr:last-child th {
+    border-bottom-left-radius: 5px;
+    border-bottom: none;
+}
+
+.settings-table tr:last-child td {
+    border-bottom-right-radius: 5px;
+    border-bottom: none;
+}
+
+.settings-table {
+    /*border: 0px solid #ccc; */
+    margin-bottom: 10px;
+}
+
+.tab-telemetry_tuning input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-telemetry_tuning table {
+    float: left;
+    margin: 0;
+    border-collapse: collapse;
+    width: calc(100% - -1px);
+}
+
+.tab-telemetry_tuning .gui_box {
+    margin-bottom: 0;
+}
+
+.tab-telemetry_tuning table, .tab-telemetry_tuning table td {
+    padding: 1px;
+    border-bottom: 0 solid #ccc;
+}
+
+.tab-telemetry_tuning .telemetry_titlebar th {
+    padding: 5px;
+    text-align: left;
+    border-right: 1px solid #ccc;
+    /* width: calc(100% -1px); */
+    width: 20%;
+}
+
+.tab-telemetry_tuning .telemetry_titlebar th:first-child {
+    text-align: left;
+}
+
+.tab-telemetry_tuning .telemetry_titlebar th:last-child {
+    border-right: none;
+}
+
+.tab-telemetry_tuning table tr td:first-child {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.tab-telemetry_tuning table tr td:last-child {
+    border-right: 0 solid #ccc;
+}
+
+.tab-telemetry_tuning table td {
+    padding: 1px;
+    width: 20%;
+    border-right: 1px solid #ccc;
+}
+
+.tab-telemetry_tuning table tr td {
+    text-align: left;
+    padding-left: 0;
+}
+
+.telemetry-section input {
+    display: block;
+    width: calc(100% - 0px);
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    border: none;
+}
+
+.tab-telemetry_tuning .profile {
+    float: left;
+    width: calc(25% - 2px); /* - border*/
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.tab-telemetry_tuning .profile .head {
+    display: block;
+    text-align: left;
+    line-height: 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #828885;
+    color: white;
+    height: 19px;
+    font-weight: normal;
+    padding: 2px 2px 3px 6px;
+}
+
+.tab-telemetry_tuning .profile select {
+    width: 100%;
+    padding-left: calc(100% - 35px);
+    height: 20px;
+    line-height: 20px;
+}
+
+.tab-telemetry_tuning select {
+    line-height: 20px;
+    margin: 4px;
+}
+
+.tab-telemetry_tuning .telemetry_tuning .name {
+    width: 25%;
+}
+
+.tab-telemetry_tuning .proportional {
+    width: 25%;
+}
+
+.tab-telemetry_tuning .integral {
+    width: 25%;
+}
+
+.tab-telemetry_tuning .derivative {
+    width: 25%;
+}
+
+.settings-table {
+    float: right;
+    width: calc(100% - 2px); /* - ( "virtual" margin) */
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.tab-telemetry_tuning .top-buttons {
+    float: right;
+}
+
+.tab-telemetry_tuning .fixed_band {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.telemetry_mode {
+    width: calc(100% - 5px);
+    height: 20px;
+    float: left;
+    margin: 0;
+    text-align: left;
+    line-height: 13px;
+    padding: 8px 0 0 5px;
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+    color: #828282;
+    font-family: 'open_sans', Arial, serif;
+    background: #D6D6D6 linear-gradient(-45deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%,
+    rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%,
+    rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%,
+    rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%,
+    rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
+    rgba(255, 255, 255, .2) 100%, transparent);
+}
+
+.telemetry_titlebar {
+    color: #fff;
+    background-color: #828885;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 20px;
+}
+
+.telemetry_titlebar td:first-child {
+    text-align: left;
+}
+
+.show {
+    width:110px;
+    float:right;
+}
+
+.show a {
+    width: calc(100% - 10px);
+}
+
+.show.unusedtelemetrysHidden {
+    width: 130px;
+}
+
+.tab-telemetry_tuning .helpicon {
+    margin-top: -1px;
+}
+
+.tab-telemetry_tuning .number .helpicon {
+    margin-top: 3px;
+    margin-right: 0;
+}
+
+.tab-telemetry_tuning .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-telemetry_tuning .spacer_left {
+    padding-left: 15px;
+    float: right;
+    width: calc(100% - 20px)
+}
+
+.tab-telemetry_tuning .numberspacer {
+    float: left;
+    width: 65px;
+    height: 21px;
+}
+
+.tab-telemetry_tuning .number {
+    margin-bottom: 5px;
+    clear: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    float: left;
+}
+
+.tab-telemetry_tuning .number:last-child {
+    padding-bottom: 5px;
+    border-bottom: 0;
+}
+
+.tab-telemetry_tuning .telemetryTuning_number {
+    clear: left;
+    padding: 4px;
+    float: left;
+}
+
+.tab-telemetry_tuning .telemetryTuning_select {
+    clear: left;
+    padding: 2px 6px 2px 1px;
+}
+
+.tab-telemetry_tuning .number input {
+    width: 50px;
+    padding-left: 3px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    border: 1px solid silver;
+    border-radius: 3px;
+    font-weight: normal;
+}
+
+.tab-telemetry_tuning .gui_box span {
+    font-style: normal;
+    font-family: 'open_sansregular', Arial, serif;
+    line-height: 19px;
+    color: #7d7d7d;
+    font-size: 11px;
+}
+
+#content-watermark {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: url("./../../../images/light-wide-2.svg") no-repeat 95% 20%;
+    background-size: 430px;
+    height: 174px;
+    opacity: 0.15;
+}
+
+.tab-telemetry_tuning .resetbt {
+    width: 140px;
+    float: right;
+    margin-right:10px;
+}
+
+.tab-telemetry_tuning .right {
+    float: right;
+}
+
+.tab-telemetry_tuning .telemetrys {
+    float: left;
+    width: 25%;
+}
+
+.tab-telemetry_tuning .leftzero {
+    padding-left: 0;
+}
+
+.tab-telemetry_tuning .tpa-breakpoint {
+    border-top-left-radius: 0;
+}
+
+.tab-telemetry_tuning .telemetryTuningLevel {
+    float: left;
+}
+
+.tab-telemetry_tuning .borderleft {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tab-telemetry_tuning .textleft {
+    width: 25%;
+    float: left;
+    text-align: left;
+}
+
+.tab-telemetry_tuning .topspacer {
+    margin-top:15px;
+}
+
+.settings-table .helpicon {
+    top: 10px;
+    position: relative;
+}
+
+.settings-table tbody {
+    /* background: #D6D6D6 linear-gradient(-45deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%, rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%, rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%, rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%, rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%, rgba(255, 255, 255, .2) 100%, transparent); */
+}
+
+.telemetry-slider-row,
+.telemetry-switch-row {
+    display: flex;
+    padding: 4px;
+}
+
+.telemetry-slider-row span,
+.telemetry-switch-row .label {
+    margin-right: 2em;
+    width: 150px;
+    line-height: 22px;;
+}
+
+.telemetry-slider-row input[type="number"],
+.telemetry-switch-row input[type="number"] {
+    font-family: 'open_sansregular', 'Segoe UI', Tahoma, sans-serif;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 0.95em;
+    border-radius: 3px;
+    padding: 0.3em;
+    margin-right: 2em;            
+}
+
+.telemetry-slider-row input[type="range"],
+.telemetry-switch-row input[type="range"]
+ {
+    display: block;
+    flex-grow: 100;
+}
+
+.telemetry-sliders-axis {
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.telemetry-sliders-axis h3 {
+    padding: 4px;
+}
+
+.telemetry-sliders-axis[data-axis="roll"],
+.telemetry-sliders-axis[data-axis="0"] {
+    background-color: #8ecae6;
+}
+
+.telemetry-sliders-axis[data-axis="pitch"],
+.telemetry-sliders-axis[data-axis="1"]
+ {
+    background-color: #00b4d8;
+}
+
+.telemetry-sliders-axis[data-axis="yaw"],
+.telemetry-sliders-axis[data-axis="2"]
+{
+    background-color: #e9c46a;
+}
+
+.telemetry-sliders-axis[data-axis="3"]
+{
+    background-color: #f4a261;
+}
+
+#telemetry-sliders {
+    margin-bottom: 1em;
+}
+
+.tab-telemetry_tuning .expo-chart {
+    margin: 0 0px 0px 0;
+    width: 200px;
+    height: 117px;
+    border: 1px solid silver;
+    border-radius: 3px;
+    background-image: url(./../../../images/paper.jpg);
+    background-size: 200%;
+    background-position: center;
+}

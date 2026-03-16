@@ -15,6 +15,7 @@ const i18n = require('./../js/localization');
 const BitHelper = require('./../js/bitHelper');
 
 TABS.sensors = {};
+
 TABS.sensors.initialize = function (callback) {
     var self = this;
 
@@ -565,7 +566,42 @@ TABS.sensors.initialize = function (callback) {
 };
 
 TABS.sensors.cleanup = function (callback) {
+    interval.killAll(['IMU_pull', 'altitude_pull', 'sonar_pull', 'airspeed_pull', 'temperature_pull', 'debug_pull']);
     CONFIGURATOR.connection.emptyOutputBuffer();
 
     if (callback) callback();
+};
+
+TABS.sensors.initializeInContainer = function(containerSelector, callback) {
+    var originalTab = GUI.active_tab;
+    GUI.active_tab = 'sensors';
+    
+    interval.killAll(['IMU_pull', 'altitude_pull', 'sonar_pull', 'airspeed_pull', 'temperature_pull', 'debug_pull']);
+    
+    var $container = $(containerSelector);
+    $.get(path.join(__dirname, "sensors.html"), function(html) {
+        $container.html(html);
+        
+        var originalFind = $.fn.find;
+        var originalInit = TABS.sensors.initialize;
+        
+        $.fn.find = function(selector) {
+            if (selector === '.tab-sensors' && this.length === 1 && this[0] === document) {
+                return $container;
+            }
+            return originalFind.call(this, selector);
+        };
+        
+        TABS.sensors.initialize(function() {
+            $.fn.find = originalFind;
+            
+            GUI.active_tab = originalTab;
+            
+            if (callback) callback();
+        });
+    });
+};
+
+TABS.sensors.reinitializeInContainer = function(containerSelector, callback) {
+    TABS.sensors.initializeInContainer(containerSelector, callback);
 };
