@@ -49,15 +49,12 @@ TABS.telemetry.initialize = function (callback) {
         GUI.load(path.join(__dirname, "telemetry.html"), Settings.processHtml(process_html));
     }
 
-    function initializeSensors() {
-        TABS.sensors.initializeInContainer('#subtab-telemetry-other', function() {
-            console.log('Sensors initialized in telemetry tab');
-        });
-    }
-
     function process_html() {
         i18n.localize();
 
+        var $sensorContainer = $('#subtab-telemetry-other');
+        
+        // Обработчик для сабтабов
         $('.subtab__header_label').on('click', function() {
             var targetId = $(this).attr('for');
             
@@ -67,12 +64,20 @@ TABS.telemetry.initialize = function (callback) {
             $('.subtab__content').removeClass('subtab__content--current');
             $('#' + targetId).addClass('subtab__content--current');
             
-            if (targetId === 'subtab-telemetry-other') {
+            if (targetId === 'subtab-telemetry-other' && $sensorContainer.children().length === 0) {
                 initializeSensors();
             }
         });
 
-        if ($('#subtab-telemetry-other').hasClass('subtab__content--current')) {
+        function initializeSensors() {
+            interval.killAll(['IMU_pull', 'altitude_pull', 'sonar_pull', 'airspeed_pull', 'temperature_pull', 'debug_pull']);
+            
+            TABS.sensors.initializeInContainer('#subtab-telemetry-other', function() {
+                console.log('Sensors initialized in telemetry tab');
+            });
+        }
+
+        if ($('#subtab-telemetry-other').hasClass('subtab__content--current') && $sensorContainer.children().length === 0) {
             initializeSensors();
         }
 
@@ -81,7 +86,6 @@ TABS.telemetry.initialize = function (callback) {
 };
 
 TABS.telemetry.cleanup = function (callback) {
-    // Очищаем интервалы сенсоров
     interval.killAll(['IMU_pull', 'altitude_pull', 'sonar_pull', 'airspeed_pull', 'temperature_pull', 'debug_pull']);
     
     if (callback) {
