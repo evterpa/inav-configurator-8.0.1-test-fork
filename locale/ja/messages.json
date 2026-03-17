@@ -1393,6 +1393,12 @@
     "pidTuning_PIDother": {
         "message": "追加PID強度 [ゲイン]"
     },
+    "telemetryMain": {
+        "message": "OSD"
+    },
+    "telemetryOther": {
+        "message": "センサー"
+    },
     "pidTuning_SelectNewDefaults": {
         "message": "新デフォルト値を選択"
     },

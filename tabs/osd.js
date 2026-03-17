@@ -3466,7 +3466,7 @@ TABS.osd.initialize = function (callback) {
     mspHelper.loadServoMixRules();
     mspHelper.loadLogicConditions();
 
-    if (GUI.active_tab != 'osd') {
+    if (GUI.active_tab !== 'osd' && GUI.active_tab !== 'telemetry') {
         GUI.active_tab = 'osd';
     }
 
@@ -3648,13 +3648,189 @@ TABS.osd.initialize = function (callback) {
             });
 
             if(semver.gte(FC.CONFIG.flightControllerVersion, '7.1.0')) {
-                mspHelper.loadOsdCustomElements(createCustomElements);
+                if (typeof LogicConditionsCollection !== 'undefined' && LogicConditionsCollection.isReady) {
+                    mspHelper.loadOsdCustomElements(createCustomElements);
+                } else {
+                    setTimeout(function() {
+                        if (typeof LogicConditionsCollection !== 'undefined') {
+                            mspHelper.loadOsdCustomElements(createCustomElements);
+                        }
+                    }, 100);
+                }
             }
 
             GUI.content_ready(callback);
         }));
     });
 };
+
+TABS.osd.initializeInContainer = function(containerSelector, callback) {
+    var self = this;
+    var $container = $(containerSelector);
+    var originalTab = GUI.active_tab;
+    
+    GUI.active_tab = 'telemetry';
+
+    $.get(path.join(__dirname, "osd.html"), function(html) {
+        $container.html(html);
+        
+        initializeOsdInContainer($container, function() {
+            GUI.active_tab = originalTab;
+            if (callback) callback();
+        });
+    });
+};
+
+
+function initializeOsdInContainer($container, callback) {
+    i18n.localize();
+    mspHelper.loadServoMixRules();
+    mspHelper.loadLogicConditions();
+
+    function save_to_eeprom() {
+        console.log('save_to_eeprom');
+        MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+            GUI.log(i18n.getMessage('eepromSaved'));
+        });
+    }
+
+    HARDWARE.update(function () {
+        
+        OSD.GUI.jbox = new jBox('Modal', {
+            width: 750,
+            height: 300,
+            position: {y:'bottom'},
+            offset: {y:-50},
+            closeButton: 'title',
+            animation: false,
+            attach: $container.find('#fontmanager'),
+            title: 'OSD Font Manager',
+            content: $container.find('#fontmanagercontent')
+        });
+
+        $container.find('a.save').on('click', function () {
+            Settings.saveInputs(save_to_eeprom);
+        });
+
+        isGuidesChecked = store.get('showOSDGuides', false);
+        $container.find(".osdSwitchInd_channel option").each(function() {
+            $(this).text("Ch " + $(this).text());
+        });
+
+        $container.find('.osdSwitchIndName').on('keyup', function() {
+            let testExp = new RegExp('^[A-Za-z0-9]');
+            let testText = $(this).val();
+            if (testExp.test(testText.slice(-1))) {
+                $(this).val(testText.toUpperCase().slice(0, 4));
+            } else {
+                $(this).val(testText.slice(0, -1));
+            }
+            refreshOSDSwitchIndicators();
+        });
+
+        $container.find("#switchIndicators_alignLeft").on('change', function() {
+            refreshOSDSwitchIndicators();
+        });
+        $container.find('#osdPanServoIndicatorShowDegrees').on('change', function() {
+            updatePanServoPreview();
+        });
+
+        $container.find('#panServoOutput').on('change', function() {
+            updatePanServoPreview();
+        });
+        $container.find('#craft_name').on('keyup', function() {
+            let testExp = new RegExp('^[A-Za-z0-9 !_,:;=@#\\%\\&\\-\\*\\^\\(\\)\\.\\+\\<\\>\\[\\]]');
+            let testText = $(this).val();
+            if (testExp.test(testText.slice(-1))) {
+                $(this).val(testText.toUpperCase());
+            } else {
+                $(this).val(testText.slice(0, -1));
+            }
+            updatePilotAndCraftNames();
+        });
+
+        $container.find('#pilot_name').on('keyup', function() {
+            let testExp = new RegExp('^[A-Za-z0-9 !_,:;=@#\\%\\&\\-\\*\\^\\(\\)\\.\\+\\<\\>\\[\\]]');
+            let testText = $(this).val();
+            if (testExp.test(testText.slice(-1))) {
+                $(this).val(testText.toUpperCase());
+            } else {
+                $(this).val(testText.slice(0, -1));
+            }
+            updatePilotAndCraftNames();
+        });
+
+        var $preview = $container.find('.font-preview');
+
+        FONT.initData();
+        var $fontPicker = $container.find('.fontbuttons button'); 
+        $fontPicker.on('click', function () {
+            if (!$(this).data('font-file')) return;
+            
+            $fontPicker.removeClass('active');
+            $(this).addClass('active');
+            
+            $.get('./resources/osd/analogue/' + $(this).data('font-file') + '.mcm', function (data) {
+                FONT.parseMCMFontFile(data);
+                FONT.preview($preview);  
+                OSD.GUI.update();
+            });
+            store.set('osd_font', $(this).data('font-file'));
+        });
+        var osd_font = store.get('osd_font', false);
+        var previous_font_button;
+        if (osd_font) {
+            previous_font_button = $container.find('.fontbuttons button[data-font-file="' + osd_font + '"]');
+            if (previous_font_button.attr('data-font-file') == undefined) previous_font_button = undefined;
+        }
+
+        if (typeof previous_font_button == "undefined") {
+            $fontPicker.first().trigger("click");
+        } else {
+            previous_font_button.trigger("click");
+        }
+        $container.find('button.load_font_file').on('click', function () {
+            $fontPicker.removeClass('active');
+            FONT.openFontFile().then(function () {
+                FONT.preview($preview);
+                OSD.GUI.update();
+            });
+        });
+        $container.find('a.flash_font').on('click', function () {
+            if (!GUI.connect_lock) {
+                var progressLabel = $container.find('.progressLabel');
+                var progressBar = $container.find('.progress');
+                var uploading = i18n.getMessage('uploadingCharacters');
+                progressLabel.text(uploading);
+                
+                var progressCallback = function(done, total, percentage) {
+                    progressBar.val(percentage);
+                    if (done == total) {
+                        progressLabel.text(i18n.getMessage('uploadedCharacters'), [total]);
+                    } else {
+                        progressLabel.text(uploading + ' (' + done + '/' + total + ')');
+                    }
+                }
+                FONT.upload(progressCallback);
+            }
+        });
+        $container.find('.update_preview').on('change', function () {
+            if (OSD.data) {
+                setTimeout(function() {
+                    OSD.GUI.saveItem({id: 0});
+                }, 100);
+            }
+        });
+
+        $container.find('#useCraftnameForMessages').on('change', function() {
+            OSD.GUI.updateDjiMessageElements(this.checked);
+        });
+        if(semver.gte(FC.CONFIG.flightControllerVersion, '7.1.0')) {
+            mspHelper.loadOsdCustomElements(createCustomElements);
+        }
+        if (callback) callback();
+    });
+}
 
 function createCustomElements(){
     if(FC.OSD_CUSTOM_ELEMENTS.settings.customElementsCount == 0){

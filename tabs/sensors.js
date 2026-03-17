@@ -14,7 +14,6 @@ const BitHelper = require('./../js/bitHelper');
 
 TABS.sensors = {};
 
-// ============ ОБЩИЕ ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ============
 function initSensorData() {
     for (var i = 0; i < 3; i++) {
         FC.SENSOR_DATA.accelerometer[i] = 0;
@@ -126,7 +125,6 @@ function drawGraph(graphHelpers, data, sampleNumber) {
     lines.attr('d', graphHelpers.line);
 }
 
-// ============ ОРИГИНАЛЬНЫЙ МЕТОД - НЕТРОНУТЫЙ ============
 TABS.sensors.initialize = function (callback) {
     var self = this;
     if (GUI.active_tab != 'sensors') {
@@ -372,7 +370,6 @@ TABS.sensors.initialize = function (callback) {
     });
 };
 
-// ============ НОВЫЙ МЕТОД ДЛЯ КОНТЕЙНЕРА ============
 TABS.sensors.initializeInContainer = function(containerSelector, callback) {
     var self = this;
     var $container = $(containerSelector);

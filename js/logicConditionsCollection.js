@@ -28,9 +28,13 @@ var LogicConditionsCollection = function () {
         return data.length
     };
 
-    self.isEnabled = function (lcID) {
-        return data[lcID].getEnabled();
-    }
+    self.isEnabled = function(lcID) {
+        if (!self.collection || !self.collection[lcID]) {
+            console.warn('[LogicConditions] Not initialized yet, id:', lcID);
+            return false;
+        }
+        return self.collection[lcID].getEnabled();
+    };
 
     self.open = function () {
         self.render();

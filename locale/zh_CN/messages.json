@@ -1395,6 +1395,12 @@
     "pidTuning_PIDother": {
         "message": "附加PID增益"
     },
+    "telemetryMain": {
+        "message": "OSD"
+    },
+    "telemetryOther": {
+        "message": "传感器"
+    },
     "pidTuning_SelectNewDefaults": {
         "message": "选择新默认值"
     },

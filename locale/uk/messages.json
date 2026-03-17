@@ -1389,6 +1389,12 @@
     "pidTuning_SelectNewDefaults": {
         "message": "Вибрати нові значення за замовчуванням"
     },
+    "telemetryMain": {
+        "message": "OSD"
+    },
+    "telemetryOther": {
+        "message": "Сенсоры"
+    },
     "pidTuning_ResetPIDController": {
         "message": "Скинути ПІД регулятор"
     },

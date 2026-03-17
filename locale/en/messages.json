@@ -1402,6 +1402,12 @@
     "pidTuning_PIDmain": {
         "message": "Main PID Gains"
     },
+    "telemetryMain": {
+        "message": "OSD"
+    },
+    "telemetryOther": {
+        "message": "Sensors"
+    },
     "pidTuning_PIDother": {
         "message": "Additional PID Gains"
     },
